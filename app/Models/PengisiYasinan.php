@@ -15,11 +15,4 @@ class PengisiYasinan extends Model
     {
         return $this->hasMany('PersonalData', 'pengisi', 'id');
     }
-
-    // public function agendat()
-    // {
-    //     return $this->hasMany('Agenda', 'pengisi', 'id');
-    // }
-
-
 }
