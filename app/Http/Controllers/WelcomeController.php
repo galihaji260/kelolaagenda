@@ -11,9 +11,17 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
+    private $breadcrumb;
 
-        
-       
+    public function __construct()
+    {
+        $this->breadcrumb = 'Agenda';
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         //
@@ -28,6 +36,7 @@ class WelcomeController extends Controller
         } else {
             $agendas = Agenda::all();
         }
+
         $tahun = ['' => '-- Pilih Bulan --','2022' => '2022', '2023' => '2023', '2024' => '2024', '2025' => '2025', '2026' => '2026'];
         $bulan = [
             '' => '-- Pilih Bulan --',
@@ -51,10 +60,10 @@ class WelcomeController extends Controller
             'terlaksana' => '#4FBBBB',
             'dibatalkan' => '#F44444'
         ];
-        // $breadcrumb = $this->breadcrumb;
+        $breadcrumb = $this->breadcrumb;
 
-        dd($tahun);
-        return view('welcome', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'color', ]));
+       
+        return view('agenda.index', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'color', 'breadcrumb']));
     }
 
     /**
@@ -65,7 +74,7 @@ class WelcomeController extends Controller
     public function create()
     {
         //
-        return view('agenda.create');
+        // return view('agenda.create');
     }
 
     /**

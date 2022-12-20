@@ -11,15 +11,15 @@ class PengisiYasinan extends Model
 
     protected $fillable = ['id', 'pasaran', 'pengisi'];
 
-    // public function personalData()
-    // {
-    //     return $this->hasMany('PersonalData', 'pengisi', 'id');
-    // }
-
-    public function agendat()
+    public function personalData()
     {
-        return $this->hasMany('Agenda', 'pengisi', 'id');
+        return $this->hasMany('PersonalData', 'pengisi', 'id');
     }
+
+    // public function agendat()
+    // {
+    //     return $this->hasMany('Agenda', 'pengisi', 'id');
+    // }
 
 
 }

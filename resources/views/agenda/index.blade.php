@@ -67,7 +67,7 @@
                     <td>{{$agenda->tanggal}}</td>
                     <td>{{$agenda->penanggungjawab['nama']}}</td>
                     <td>{{$agenda->pengisiAgenda['nama']}}</td>
-                    <td>{{$agenda->jenis}}</td>
+                    <td>{{$agenda->jenisAgenda->nama}}</td>
                     <td> 
                       @if($agenda->statusAgenda->nama == 'Berjalan')
                       <span class="badge badge-primary">{{ $agenda->statusAgenda->nama }}</span>

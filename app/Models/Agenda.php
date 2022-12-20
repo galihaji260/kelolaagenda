@@ -36,5 +36,10 @@ class Agenda extends Model
     public function statusAgenda(){
         return $this->belongsTo(StatusKegiatan::class,'status');
     }
+
+    public function jenisAgenda(){
+        return $this->belongsTo(jenisAgenda::class,'jenis');
+    }
+    
     
 }

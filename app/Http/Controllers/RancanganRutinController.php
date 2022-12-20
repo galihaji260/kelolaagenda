@@ -106,7 +106,7 @@ class RancanganRutinController extends Controller
             $pasaran = new PasaranHelper();
             $dates = $pasaran->getAllPasaranInYear($req['tahun'], $req['hari']);
             $pengisi = PengisiYasinan::select(['pasaran', 'pengisi'])->get()->toArray();
-            $personalData = PersonalData::pluck('nama');
+            $personalData = PersonalData::pluck('nama', 'id');
             return view('rancangan.rutin.yasinan', compact(['dates', 'req', 'pengisi', 'personalData']));
         }
         return view('rancanganrutin.index');

@@ -44,8 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/rancanganrutin/lainnyastore', [RancanganRutinController::class, 'lainnyastore'])->name('rancanganrutin.lainnyastore');
 });
 
-// Route::resource('welcome', WelcomeController::class);
-// Route::post('/welcome', [WelcomeController::class, 'index'])->name('agenda.search');
+
+
+// Route::post('/', [WelcomeController::class, 'index'])->name('agenda.search');
 
 Route::get('/', function () {
     return view('welcome');

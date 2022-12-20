@@ -8,26 +8,26 @@ use DateTime;
 
 class PasaranHelper
 {
-    // public function getAllPasaranDateInYear($year, $dayname, $pasaran = null)
-    // {
-    //     $result = [];
-    //     $startdate = "$year-01-01";
-    //     $enddate = "$year-12-31";
-    //     $dates = $this->getDatesFromRange($startdate, $enddate);
-    //     foreach ($dates as $date) {
-    //         $day = date('l', strtotime($date));
-    //         $pasar = $this->getPasaran($date);
-    //         if ($pasaran && $day == $dayname && $pasar == $pasaran) {
-    //             array_push($result, $date);
-    //         }
+    public function getAllPasaranDateInYear($year, $dayname, $pasaran = null)
+    {
+        $result = [];
+        $startdate = "$year-01-01";
+        $enddate = "$year-12-31";
+        $dates = $this->getDatesFromRange($startdate, $enddate);
+        foreach ($dates as $date) {
+            $day = date('l', strtotime($date));
+            $pasar = $this->getPasaran($date);
+            if ($pasaran && $day == $dayname && $pasar == $pasaran) {
+                array_push($result, $date);
+            }
 
-    //         if (!$pasaran && $day == $dayname) {
-    //             array_push($result, $date);
-    //         }
-    //     }
+            if (!$pasaran && $day == $dayname) {
+                array_push($result, $date);
+            }
+        }
 
-    //     return $result;
-    // }
+        return $result;
+    }
 
     public function getAllPasaranInYear($year, $dayname, $pasaran = null)
     {

@@ -62,8 +62,8 @@ class AgendaController extends Controller
         ];
         $breadcrumb = $this->breadcrumb;
 
-       
-        return view('agenda.index', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'color', 'breadcrumb']));
+    
+         return view('agenda.index', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'color', 'breadcrumb']));
     }
 
     /**
