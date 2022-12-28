@@ -31,11 +31,14 @@
                   <div class="col-lg-4 mb-2">
                   {!! Form::select('divisi', $divisi, $request->divisi, ['class' => 'form-control']) !!}
                   </div>
-                  <div class="col-lg-4 mb-2">
+                  <div class="col-lg-2 mb-2">
                   {!! Form::select('jenis', $jenis, $request->jenis, ['class' => 'form-control']) !!}
                   </div>
+                  <div class="col-lg-2 mb-2">
+                    {!! Form::select('status', $status, $request->status, ['class' => 'form-control']) !!}
+                    </div>
                   <div class="col-lg-4 mb-2">
-                  <input type="text" class="form-control" name="keyword" value="{{ $request->keyword }}">
+                  <input type="text" class="form-control" name="keyword" value="{{ $request->keyword }}" placeholder="Tulis nama kegiatan">
                   </div>
                   <div class="col-lg-4 mb-2">
                   <input type="submit" value="Cari" class="btn btn-primary">
@@ -55,6 +58,7 @@
                     <th>Pengisi</th>
                     <th>Jenis</th>
                     <th>Status</th>
+                    <th> Beri Nilai </th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
@@ -78,6 +82,11 @@
                       @endif
 
                     </td>
+                    <td> 
+                      <a class="" href="{{ route('penilaiankegiatan.edit', $agenda->id) }}">
+                      <i class="fa fa-tasks" aria-hidden="true" title="Nilai"></i>
+                      </a>
+                    </td>
                     <td>
                       <form action="{{ route('agenda.destroy', $agenda->id) }}" method="POST">
                         <a class="" href="{{ route('agenda.edit', $agenda->id) }}">
@@ -88,8 +97,8 @@
                         <button type="submit" class="btn">
                           <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                         </button>
-                        <a class="" href="{{ route('penilaiankegiatan.edit', $agenda->id) }}">
-                          <i class="fa fa-tasks" aria-hidden="true" title="Nilai"></i>
+                        <a class="" data-toggle="modal" data-target="#modalSaya{{ $agenda->id }}">
+                          <i class="fa fa-eye" aria-hidden="true" title="Nilai"></i>
                         </a>
                       </form>
                     </td>
@@ -99,6 +108,138 @@
                 </table>
                 </div>
               </div>
+
+              <!-- Contoh Modal -->
+              @foreach($agendas as $agenda)
+<div class="modal fade" id="modalSaya{{ $agenda->id }}" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSayaLabel">Detail Agenda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="content">
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Nama Agenda</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{$agenda->nama_kegiatan}}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Tanggal</div>
+            </div>
+             <div class="col">
+              
+               <div class="panel panel-pink">: {{ $pasaran->getHari($agenda->tanggal).' '.$pasaran->getPasaran($agenda->tanggal).'/'. $agenda->tangga }}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Waktu</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{ $agenda->waktu_mulai.'-'.$agenda->waktu_selesai }}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Lokasi</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{ $agenda->tempat }}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Divis</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{ $agenda->namaDivisi->nama }}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Penanggung Jawab</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{ $agenda->penanggungjawab->nama }}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Pengisi</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{ $agenda->pengisiAgenda->nama }}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Jenis</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{$agenda->jenisAgenda->nama}}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Deskripsi Kegiatan</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{$agenda->deskripsi_kegiatan}}</div>
+             </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Anggaran</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{ $agenda->anggaran }}</div>
+             </div>
+          </div>           <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Realisasi Anggaran</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: {{ $agenda->realisasi_anggaran }}</div>
+             </div>
+          </div>           <hr/>
+          <div class="row">
+            <div class="col">
+              <div class="panel panel-pink">Status</div>
+            </div>
+             <div class="col">
+               <div class="panel panel-pink">: <span class="badge badge-success">{{ $agenda->statusAgenda->nama }}</span></div>
+             </div>
+          </div> 
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+{{-- endmodal --}}
+
+
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -132,6 +273,8 @@
       "lengthChange": false,
       "searching": false
     });
+
+
   });
 </script>
 @endpush

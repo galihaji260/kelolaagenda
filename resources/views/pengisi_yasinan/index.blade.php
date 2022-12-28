@@ -17,6 +17,9 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Pengisi Yasinan</h3>
+                <div class="card-tools">
+                  <a class="btn btn-primary" href="{{ route('pengisiyasinan.create') }}">Tambah</a>
+                </div>
               </div>
               <!-- /.card-header -->
               @if (session('status'))

@@ -10,4 +10,8 @@ class PenilaianKegiatan extends Model
     use HasFactory;
     
     protected $fillable = ['nilai', 'gambar', 'catatan_pelaksanaan', 'agenda_id', 'user_id'];
+
+    public function penilain(){
+        return $this->belongsTo(Agenda::class);
+    }
 }

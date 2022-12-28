@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $data['agenda'] = json_encode($evals);
 
         foreach ($pengisir as $spengisi) {
-            $top['kontributor'] = Agenda::where('pengisi', $spengisi)->count();
+            $top['kontributor'] = Agenda::where('pengisi', $spengisi)->where('status', '2')->count();
             $top['name'] = PersonalData::select('nama')->where('id', $spengisi)->first();
 
             $kontributors[] =  [$top['name']->nama, $top['kontributor']];

@@ -62,14 +62,14 @@
             </div>
             <div class="form-group">
               <label for="waktu">Waktu mulai</label>
-              <input type="time" name="waktu" class="form-control" id="waktu" value="{{ $agenda->waktu }}" placeholder="Waktu">
+              <input type="time" name="waktu" class="form-control" id="waktu_mulai" value="{{ $agenda->waktu_mulai }}" placeholder="Waktu">
               @error('waktu')
               <div class="alert alert-danger">{{ $message }}</div>
               @enderror
             </div>
             <div class="form-group">
               <label for="time">Waktu Selesai</label>
-              <input type="time" name="waktu" class="form-control" id="waktu" value="{{ $agenda->waktu }}" placeholder="Waktu">
+              <input type="time" name="waktu" class="form-control" id="waktu_selesai" value="{{ $agenda->waktu_selesai }}" placeholder="Waktu">
               @error('waktu')
               <div class="alert alert-danger">{{ $message }}</div>
               @enderror
@@ -114,6 +114,13 @@
             <div class="form-group">
               <label for="anggaran">Anggaran</label>
               <input type="text" name="anggaran" class="form-control" id="anggaran" value="{{ $agenda->anggaran }}" placeholder="Anggaran">
+              @error('anggaran')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="form-group">
+              <label for="anggaran">Realisasi Anggaran</label>
+              <input type="text" name="relasisasianggaran" class="form-control" id="realisasianggaran" value="{{ $agenda->realisasi_anggaran }}" placeholder="Anggaran">
               @error('anggaran')
               <div class="alert alert-danger">{{ $message }}</div>
               @enderror

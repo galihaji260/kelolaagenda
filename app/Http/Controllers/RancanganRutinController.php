@@ -114,7 +114,10 @@ class RancanganRutinController extends Controller
 
     public function yasinanstore(Request $request)
     {
-        //
+        // $request->validate([
+        //     'divisi' => 'required',
+        //     'penanggung_jawab' => 'required'
+        // ]);
         $req = $request->input();
         for ($i = 0; $i < count($req['tanggal']); $i++) {
             Agenda::create([
@@ -128,7 +131,7 @@ class RancanganRutinController extends Controller
                 'divisi' => $req['divisi'][$i],
                 'waktu_mulai' => $req['waktu_mulai'][$i],
                 'waktu_selesai' => $req['waktu_selesai'][$i],
-                'tempat'  => '',
+                'tempat'  => $req['lokasi'][$i],
                 'anggaran' => '0',
                 'deskripsi_kegiatan' => '',
             ]);
@@ -162,15 +165,15 @@ class RancanganRutinController extends Controller
                 'penanggung_jawab' => $req['penanggungjawab'][$i],
                 'pengisi' => $req['pengisi'][$i],
                 'jenis' => '1',
-                'status' => '3',
+                'status' => '1',
                 'divisi' => $req['divisi'][$i],
                 'waktu_mulai' => $req['waktu_mulai'][$i],
                 'waktu_selesai' => $req['waktu_selesai'][$i],
-                'tempat'  => '-',
+                'tempat'  => $req['lokasi'][$i],
                 'anggaran' => '0',
                 'deskripsi_kegiatan' => '',
             ]);
         }
-        return redirect()->route('rancanganrutin.index');
+        return redirect()->route('agenda.index');
     }
 }

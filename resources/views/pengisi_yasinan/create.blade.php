@@ -6,12 +6,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Tambah Pengisi Yasinan</h1>
+        <h1>Tambah Anggota</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Tambah Pengisi Yasinan</li>
+          <li class="breadcrumb-item active">Tambah Anggota</li>
         </ol>
       </div>
     </div>
@@ -26,7 +26,7 @@
       <div class="col-md-12">
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Tambah Pengisi Yasinan</h3>
+            <h3 class="card-title">Tambah Anggota</h3>
 
             <div class="card-tools">
             </div>
@@ -35,23 +35,25 @@
             <div class="alert alert-success">{{ session('status') }}</div>
           @endif
           <div class="card-body">
-          <div class="form-group">
-              <label for="pasaran">Pasaran</label>
-              <input type="text" name="pasaran" class="form-control" id="pasaran" placeholder="Pasaran">
-              @error('pasaran')
+            <div class="form-group">
+              <label for="nama">Nama</label>
+              <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" required>
+              <input type="hidden" name="tipe" class="form-control" value="internal">
+              @error('nama')
               <div class="alert alert-danger">{{ $message }}</div>
               @enderror
             </div>
+
             <div class="form-group">
-              <label for="pengisi">Pengisi</label>
-              <input type="text" name="pengisi" class="form-control" id="pengisi" placeholder="Pengisi">
-              @error('pengisi')
+              <label for="nama">No WA</label>
+              <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="No WA" required>
+              @error('no_hp')
               <div class="alert alert-danger">{{ $message }}</div>
               @enderror
             </div>
           </div>
           <div class="card-footer">
-            <a href="{{ route('pengisiyasinan.index') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ route('anggota.index') }}" class="btn btn-secondary">Back</a>
             <input type="submit" value="Save" name="submit" class="btn btn-success float-right">
           </div>
           <!-- /.card-body -->

@@ -59,6 +59,42 @@
     </div>
   </form>
 </section>
+
+<section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">komentar</h3>
+            <div class="card-tools">
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>komentar</th>
+                  <th>gambar</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{-- @foreach($agendas as $agenda) --}}
+                <tr>
+                  <td>1</td>
+                  <td>penilaian 1td>
+                  <td>gambar</td>
+                </tr>
+                {{-- @endforeach --}}
+                </tfoot>
+              </table>
+              </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+</section>
 <!-- /.content -->
 @stop
 @push('scripts')

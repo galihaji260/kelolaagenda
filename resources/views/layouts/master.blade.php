@@ -48,6 +48,9 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
+       <li>
+        <a href="index3.html" class="nav-link">Hai {{ Auth::user()->username}}</a>
+       </li>
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
             <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" width="24" alt="User Image">

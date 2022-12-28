@@ -67,7 +67,7 @@
     width: 110px;" readonly></td>
                   <td><input type="text" name="waktu[]" class="form-control" value="{{ $req['mulai'].'-'.$req['selesai']}}" style="
     width: 150px;" required readonly></td>
-                  <td><input type="text" name="lokasi[]" value="{{ ($date['pasaran'] == 'pahing')?'masjid':'' }}" class="form-control" style="
+                  <td><input type="text" name="lokasi[]" value="{{ ($date['pasaran'] == 'pahing')?'masjid':'-' }}" class="form-control" style="
     width: 110px;"></td>
                   <td style="width:5%">
                     <button onclick="deleteRow({{ $i}})" class="btn btn-danger" style="width: auto;"><i class="fa fa-trash" aria-hidden="true"></i></button>

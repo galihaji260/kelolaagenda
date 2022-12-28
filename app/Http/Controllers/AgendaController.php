@@ -30,6 +30,8 @@ class AgendaController extends Controller
                 'tanggal' => $request->tahun . '-' . $request->bulan,
                 'divisi' => $request->divisi,
                 'jenis' => $request->jenis,
+                'status' => $request->status,
+
                 'nama_kegiatan' => $request->keyword
             );
             $agendas = Agenda::search($search);
@@ -37,7 +39,7 @@ class AgendaController extends Controller
             $agendas = Agenda::all();
         }
 
-        $tahun = ['' => '-- Pilih Bulan --','2022' => '2022', '2023' => '2023', '2024' => '2024', '2025' => '2025', '2026' => '2026'];
+        $tahun = ['' => '-- Pilih Tahun --','2022' => '2022', '2023' => '2023', '2024' => '2024', '2025' => '2025', '2026' => '2026'];
         $bulan = [
             '' => '-- Pilih Bulan --',
             '01' => 'Januari',
@@ -55,15 +57,16 @@ class AgendaController extends Controller
         ];
         $divisi = Divisi::pluck('nama', 'id')->prepend('-- Pilih Divisi --', '');
         $jenis = JenisAgenda::pluck('nama', 'id')->prepend('-- Pilih Jenis --', '');
-        $color = [
-            'berjalan' => '#FCC000',
-            'terlaksana' => '#4FBBBB',
-            'dibatalkan' => '#F44444'
-        ];
+        $status = StatusKegiatan::pluck('nama', 'id')->prepend('-- Pilih Status --', '');
+        // $color = [
+        //     'berjalan' => '#FCC000',
+        //     'terlaksana' => '#4FBBBB',
+        //     'dibatalkan' => '#F44444'
+        // ];
         $breadcrumb = $this->breadcrumb;
-
+       
     
-         return view('agenda.index', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'color', 'breadcrumb']));
+         return view('agenda.index', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'status', 'breadcrumb']));
     }
 
     /**

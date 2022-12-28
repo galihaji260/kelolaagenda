@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Divisi;
+use App\Models\Role;
 use App\Models\PengisiYasinan;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
@@ -35,8 +36,10 @@ class PengisiYasinanController extends Controller
      */
     public function create()
     {
-        //
-        return view('pengisi_yasinan.create');
+        $divisi = Divisi::pluck('nama', 'id');
+        $role = Role::pluck('nama', 'id');
+
+        return view('pengisi_yasinan.create', compact('divisi', 'role'));
     }
 
     /**
@@ -49,11 +52,17 @@ class PengisiYasinanController extends Controller
     {
         //
         $request->validate([
-            'pasaran' => 'required',
-            'pengisi' => 'required'
+            'nama' => 'required',
+            'no_hp' => 'required'
         ]);
-        PengisiYasinan::create($request->post());
-        return redirect()->route('pengisiyasinan.index')->with('success', 'Sukses Menambah Data Pengisi Yasinan');
+        PersonalData::create([
+            'nama' => $request->nama,
+            'no_hp'  => $request->no_hp,
+            'tipe'  => 'eksternal',
+            'divisi' => '-',
+            'role' => '-',
+        ]);
+        return redirect()->route('anggota.index')->with('success', 'Sukses Menambah Data Anggota');
     }
 
     /**

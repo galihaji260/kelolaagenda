@@ -15,4 +15,8 @@ class PersonalData extends Model
     {
         return $this->belongsTo('PengisiYasinan', 'pengisi', 'id');
     }
+
+    public function detailinfo(){
+        return $this->belongsTo(User::class);
+    }
 }

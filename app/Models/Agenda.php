@@ -40,6 +40,13 @@ class Agenda extends Model
     public function jenisAgenda(){
         return $this->belongsTo(jenisAgenda::class,'jenis');
     }
+
+    public function namaDivisi(){
+        return $this->belongsTo(Divisi::class,'divisi');
+    }
+    public function punyanilai(){
+        return $this->hasmany(PenilaianKegiatan::class);
+    }
     
     
 }
