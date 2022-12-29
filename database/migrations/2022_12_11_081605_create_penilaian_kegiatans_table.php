@@ -14,12 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('penilaian_kegiatans', function (Blueprint $table) {
-            $table->id();
-            $table->integer('agenda_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('agenda_id');
+            $table->unsignedBigInteger('penilai_id');
             $table->integer('nilai');
             $table->string('gambar');
             $table->longText('catatan_pelaksanaan');
-            $table->integer('user_id');
+           
+            $table->foreign('agenda_id')->references('id')->on('agendas')->onDelete('cascade');
+            $table->foreign('penilai_id')->references('id')->on('personal_data');
             $table->timestamps();
         });
     }

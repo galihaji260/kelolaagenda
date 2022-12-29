@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Notulas;
 
 class NotulaController extends Controller
 {
@@ -13,7 +14,8 @@ class NotulaController extends Controller
      */
     public function index()
     {
-        return view('notula.index');
+        $notulas = Notulas::all();
+        return view('notula.index', compact('notulas'));
     }
 
     /**
@@ -39,6 +41,20 @@ class NotulaController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'judul'     => 'required',
+            'peserta'     => 'required',
+            'konten'   => 'required'
+        ]);
+
+        Notulas::create([
+            'personaldata_id' => $request->pencatat,
+            'tanggal' => $request->tanggal,
+            'judul' => $request->judul,
+            'peserta'     => $request->peserta,
+            'konten'   => $request->konten
+        ]);
+        return redirect()->route('notula.index')->with('success', 'Sukses Menambah Data Jenis Agenda');
     }
 
     /**
@@ -60,7 +76,8 @@ class NotulaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $notula = Notulas::findOrfail($id);
+        return view('notula.edit', compact('notula'));
     }
 
     /**
@@ -72,8 +89,18 @@ class NotulaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         //
+         $request->validate([
+            'judul'     => 'required',
+            'peserta'     => 'required',
+            'konten'   => 'required'
+        ]);
+        $notula = Notulas::findOrfail($id);
+        $notula->fill($request->post())->save();
+
+        return redirect()->route('notula.index')->with('success', 'Jenis Agenda Berhasil Diupdate');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -83,6 +110,8 @@ class NotulaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $notula = Notulas::findOrfail($id);
+        $notula->delete();
+        return redirect()->route('notula.index')->with('success', 'Jenis Agenda Berhasil Dihapus');
     }
 }

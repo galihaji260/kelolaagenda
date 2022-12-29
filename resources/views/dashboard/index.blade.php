@@ -1,62 +1,62 @@
 @extends('layouts.master')
 
 @section('content')
-@inject('pasaran', 'App\Lib\PasaranHelper')
- <!-- Content Header (Page header) -->
- <section class="content-header">
-      <div class="container-fluid">
-      </div><!-- /.container-fluid -->
+    @inject('pasaran', 'App\Lib\PasaranHelper')
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Dashboard</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                        <div class="row">
-            <div class="col-md-12 col-lg-6">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Statistik Agenda</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <div id="evalagenda" style="width:100%"></div>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Dashboard</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Statistik Agenda</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <div id="evalagenda" style="width:100%"></div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
 
-            </div>
-            <div class="col-md-12 col-lg-6">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Statistik Kontributor Pengisi</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <div id="kontributor" style="width:100%"></div>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Statistik Kontributor Pengisi</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <div id="kontributor" style="width:100%"></div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
             </div>
+            <!-- /.row -->
         </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
+        <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 @stop
@@ -68,6 +68,7 @@
             'packages': ['bar']
         });
         google.charts.setOnLoadCallback(drawChart);
+
         function drawChart() {
             var obj = JSON.parse(@json($data['agenda']));
             console.log(obj)
@@ -82,8 +83,10 @@
             var options = {
                 chart: {
                     title: 'Statistik Kegiatan di hitung pertahun',
-                    colors: ['#007bff', '#28a745', '#dc3545', '#17a2b8']
-                }
+
+                },
+                colors: ['#007bff', '#28a745', '#dc3545', '#17a2b8']
+
             };
             console.log(options)
             var chart = new google.charts.Bar(document.getElementById('evalagenda'));
@@ -95,6 +98,7 @@
             'packages': ['corechart']
         });
         google.charts.setOnLoadCallback(drawChart);
+
         function drawChart() {
             var obj = JSON.parse(@json($data['kontributor']));
             var i;

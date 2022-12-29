@@ -42,15 +42,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/rancanganrutin/yasinanstore', [RancanganRutinController::class, 'yasinanstore'])->name('rancanganrutin.yasinanstore');
     Route::post('/rancanganrutin/lainnya', [RancanganRutinController::class, 'lainnya'])->name('rancanganrutin.lainnya');
     Route::post('/rancanganrutin/lainnyastore', [RancanganRutinController::class, 'lainnyastore'])->name('rancanganrutin.lainnyastore');
+    Route::get('/getPengisi', [RancanganRutinController::class, 'getPengisi'])->name('getPengisi');
+
 });
 
 
 
-// Route::post('/', [WelcomeController::class, 'index'])->name('agenda.search');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('login', [UserController::class, 'login'])->name('login');
 Route::post('login', [UserController::class, 'loginAction'])->name('login.action');

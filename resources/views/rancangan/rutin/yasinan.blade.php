@@ -57,7 +57,7 @@
                   <td><input type="text" name="pasaran[]" value="{{ $date['pasaran'] }}" class="form-control" style="
     width: 80px;" readonly required></td>
                   <td>
-                    {!! Form::select('pengisi[]', $personalData, $pengisi[array_search($date['pasaran'], array_column($pengisi, 'pasaran'))]['pengisi'], ['class' => 'form-control','readonly', 'style="width:100px"']) !!}
+                    {!! Form::select('pengisi[]', $personalData, $pengisi[array_search($date['pasaran'], array_column($pengisi, 'pasaran'))]['personaldata_id'], ['class' => 'form-control','readonly', 'style="width:100px"']) !!}
                     <input type="hidden" name="penanggungjawab[]" value="{{ $req['pic'] }}" class="form-control" required>
                     <input type="hidden" name="divisi[]" value="{{ $req['divisi'] }}" class="form-control" required>
                     <input type="hidden" name="waktu_mulai[]" value="{{ $req['mulai'] }}">

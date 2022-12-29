@@ -26,7 +26,7 @@ class AnggotaController extends Controller
     {
         //
         $breadcrumb = $this->breadcrumb;
-        $anggotas = PersonalData::leftJoin('divisis', 'divisis.id', 'personal_data.divisi')
+        $anggotas = PersonalData::leftJoin('divisis', 'divisis.id', 'personal_data.divisi_id')
             ->where('personal_data.tipe', 'internal')
             ->get(['personal_data.id', 'personal_data.nama', 'divisis.nama as divisi', 'personal_data.no_hp']);
         return view('anggota.index', compact(['anggotas', 'breadcrumb']));
@@ -87,9 +87,8 @@ class AnggotaController extends Controller
      */
     public function edit($id)
     {
-        //
         $personalData = PersonalData::findOrfail($id);
-        $anggota = PersonalData::leftjoin('users', 'users.personal_data_id', 'personal_data.id')->where('personal_data.id', $personalData->id)->first(['personal_data.id', 'personal_data.nama', 'personal_data.divisi', 'personal_data.no_hp', 'users.username', 'users.role_id as role']);
+        $anggota = PersonalData::leftjoin('users', 'users.personal_data_id', 'personal_data.id')->where('personal_data.id', $personalData->id)->first(['personal_data.id', 'personal_data.nama', 'personal_data.divisi_id', 'personal_data.no_hp', 'users.username', 'users.role_id as role']);
         $divisi = Divisi::pluck('nama', 'id');
         $role = Role::pluck('nama', 'id');
 
@@ -105,7 +104,7 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
         $request->validate([
             'nama' => 'required',
             'no_hp' => 'required'

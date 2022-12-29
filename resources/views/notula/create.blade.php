@@ -10,7 +10,7 @@
 
 <!-- Main content -->
 <section class="content">
-  <form action="{{ route('notula.index') }}">
+  <form action="{{ route('notula.store') }}" method="POST">
     @csrf
     <div class="row">
       <div class="col-md-12">
@@ -26,9 +26,9 @@
               <div class="col-12">
                 <div class="form-group">
                                                 <label class="font-weight-bold">PENCATAT</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ Auth::user()->username }}" readonly> 
+                                <input type="text" class="form-control @error('pencatat') is-invalid @enderror" name="pencatat" value="{{ Auth::user()->personal_data_id }}" readonly> 
                                 <!-- error message untuk title -->
-                                @error('title')
+                                @error('pencatat')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -36,22 +36,22 @@
                             </div>
                                                         <div class="form-group">
                                 <label class="font-weight-bold">TANGGAL</label>
-                                <input type="date" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Judul Post">
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" value="{{ old('tanggal') }}" placeholder="Masukkan Judul Post">
                             
                                 <!-- error message untuk title -->
-                                @error('title')
+                                @error('tanggal')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
 
-                                                        <div class="form-group">
+                                  <div class="form-group">
                                 <label class="font-weight-bold">PESERTA</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Judul Post">
+                                <input type="text" class="form-control @error('peserta') is-invalid @enderror" name="peserta" value="{{ old('peserta') }}" placeholder="Masukkan Judul Post">
                             
                                 <!-- error message untuk title -->
-                                @error('title')
+                                @error('peserta')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -60,7 +60,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">JUDUL</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Judul Post">
+                                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul') }}" placeholder="Masukkan Judul Post">
                             
                                 <!-- error message untuk title -->
                                 @error('title')
@@ -72,7 +72,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">ISI RAPAT</label>
-                                <textarea class="form-control @error('content') is-invalid @enderror" name="content" rows="5" placeholder="Masukkan Konten Post">{{ old('content') }}</textarea>
+                                <textarea class="form-control @error('konten') is-invalid @enderror" name="konten" rows="5" placeholder="Masukkan Konten Post">{{ old('content') }}</textarea>
                             
                                 <!-- error message untuk content -->
                                 @error('content')
@@ -101,6 +101,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace( 'content' );
+    CKEDITOR.replace( 'konten' );
 </script>
 @stop

@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('status_kegiatans', function (Blueprint $table) {
+        Schema::create('notulas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
+            $table->unsignedBigInteger('personaldata_id');
+            $table->date('tanggal');
+            $table->string('judul');
+            $table->string('peserta');
+            $table->longtext('konten');
+            
+            $table->foreign('personaldata_id')->references('id')->on('personal_data');
             $table->timestamps();
         });
     }
@@ -27,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_kegiatans');
+        Schema::dropIfExists('notulas');
     }
 };

@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('personal_data', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('divisi');
+            $table->unsignedBigInteger('divisi_id');
             $table->string('no_hp');
             $table->string('tipe');
             $table->timestamps();

@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('status_kegiatans', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nama');
-            $table->timestamps();
+        Schema::table('pengisi_yasinans', function (Blueprint $table) {
+            $table->foreign('personaldata_id')->references('id')->on('personal_data');
         });
     }
 
@@ -27,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_kegiatans');
+        Schema::table('pengisi_yasinans', function (Blueprint $table) {
+            //
+        });
     }
 };

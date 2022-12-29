@@ -16,7 +16,7 @@
 
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Anggota</h3>
+            <h3 class="card-title">Notula</h3>
             <div class="card-tools">
               <a class="btn btn-primary" href="{{ route('notula.create') }}">Tambah</a>
             </div>
@@ -29,22 +29,23 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Judul Notula</th>
-                  <th>Tanggal dibuat</th>
+                  <th>ID</th>
                   <th>Pencatat</th>
-                  <th>Action</th>
+                  <th>Tanggal</th>
+                  <th>Judul</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
+                @foreach($notulas as $notula)
                 <tr>
-                  <td>1</td>
-                  <td>Rapat akhir tahun 2022</td>
-                  <td>12/12/2022</td>
-                  <td>Bp A</td>
+                  <td>{{$notula->id}}</td>
+                  <td>{{$notula->pencatat->nama}}</td>
+                  <td>{{$notula->tanggal}}</td>
+                  <td>{{$notula->judul}}</td>
                   <td>
-                    <form action="" method="POST">
-                      <a class="" href="">
+                    <form action="{{ route('notula.destroy', $notula->id) }}" method="POST">
+                      <a class="" href="{{ route('notula.edit', $notula->id) }}">
                         <i class="fa fa-pen" aria-hidden="true"></i>
                       </a>
                       @csrf
@@ -52,70 +53,83 @@
                       <button type="submit" class="btn">
                         <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                       </button>
-                    </form>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>2</td>
-                  <td>Rapat acara pembentukan panitia</td>
-                  <td>11/05/2022</td>
-                  <td>Bp A</td>
-                  <td>
-                    <form action="" method="POST">
-                      <a class="" href="">
-                        <i class="fa fa-pen" aria-hidden="true"></i>
+                      <a class="" data-toggle="modal" data-target="#modalSaya">
+                        <i class="fa fa-eye" aria-hidden="true" title="Nilai"></i>
                       </a>
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn">
-                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                      </button>
                     </form>
                   </td>
                 </tr>
-
-                <tr>
-                  <td>3</td>
-                  <td>Musyawarah sawah hibah</td>
-                  <td>12/12/2022</td>
-                  <td>Bp Andika</td>
-                  <td>
-                    <form action="" method="POST">
-                      <a class="" href="">
-                        <i class="fa fa-pen" aria-hidden="true"></i>
-                      </a>
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn">
-                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>4</td>
-                  <td>Persiapan ramadhan</td>
-                  <td>14/03/2021</td>
-                  <td>Bp A</td>
-                  <td>
-                    <form action="" method="POST">
-                      <a class="" href="">
-                        <i class="fa fa-pen" aria-hidden="true"></i>
-                      </a>
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn">
-                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-              
+                @endforeach
               </tbody>
+            
             </table>
           </div>
+
+                        <!-- Contoh Modal -->
+                        @foreach($notulas as $notula)
+                        
+                        <div class="modal fade" id="modalSaya" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalSayaLabel">Detail Agenda</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <section class="content">
+                                  <div class="row">
+                                    <div class="col">
+                                      <div class="panel panel-pink">Judul</div>
+                                    </div>
+                                     <div class="col">
+                                       <div class="panel panel-pink">: {{$notula->judul}}</div>
+                                     </div>
+                                  </div> 
+                                  <hr/>
+                                  <div class="row">
+                                    <div class="col">
+                                      <div class="panel panel-pink">Tanggal</div>
+                                    </div>
+                                     <div class="col">
+                                       <div class="panel panel-pink">: {{ $notula->tanggal }}</div>
+                                     </div>
+                                  </div> 
+                                  <hr/>
+                                  <div class="row">
+                                    <div class="col">
+                                      <div class="panel panel-pink">Peserta</div>
+                                    </div>
+                                     <div class="col">
+                                       <div class="panel panel-pink">: {{ $notula->peserta }}</div>
+                                     </div>
+                                  </div> 
+                                  <hr/>
+                                  <div class="row">
+                                    <div class="col">
+                                      <div class="panel panel-pink">Konten</div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="panel panel-pink">:</div>
+                                    </div>
+                                  </div> 
+                                  <hr/>
+                                  <div class="row">
+                                     <div class="col">
+                                       <div class="panel panel-pink">{!! $notula->konten !!}</div>
+                                     </div>
+                                  </div> 
+                                </section>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>      
+                        @endforeach      
+                        {{-- endmodal --}}
           <!-- /.card-body -->
         </div>
         <!-- /.card -->

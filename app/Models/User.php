@@ -46,4 +46,10 @@ class User extends Authenticatable
     public function persondata(){
         return $this->hasMany(PersonalData::class, 'personal_data_id');
     }
+
+    public function userRole(){
+        return $this->belongsTo(Role::class, 'role_id');
+
+    }
+
 }

@@ -9,11 +9,11 @@ class PersonalData extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'divisi','no_hp', 'tipe'];
+    protected $fillable = ['nama', 'divisi_id','no_hp', 'tipe'];
 
     public function pengisiYasinan()
     {
-        return $this->belongsTo('PengisiYasinan', 'pengisi', 'id');
+        return $this->belongsTo('PengisiYasinan', 'personaldata_id', 'id');
     }
 
     public function detailinfo(){

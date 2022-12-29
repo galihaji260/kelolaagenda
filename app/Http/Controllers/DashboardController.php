@@ -21,11 +21,11 @@ class DashboardController extends Controller
         $now = Carbon::now();
         $years = $result->pluck('year');
         foreach ($years as $year) {
-            $eval['berjalan'] = Agenda::whereYear('tanggal', '=', $year)->where('status', '1')
+            $eval['berjalan'] = Agenda::whereYear('tanggal', '=', $year)->where('status_id', '1')
                 ->count();
-            $eval['terlaksana'] = Agenda::whereYear('tanggal', '=', $year)->where('status', '2')
+            $eval['terlaksana'] = Agenda::whereYear('tanggal', '=', $year)->where('status_id', '2')
                 ->count();
-            $eval['batal'] = Agenda::whereYear('tanggal', '=', $year)->where('status', '3')
+            $eval['batal'] = Agenda::whereYear('tanggal', '=', $year)->where('status_id', '3')
                 ->count();
             $eval['total'] = Agenda::whereYear('tanggal', '=', $year)
                 ->count();
@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $data['agenda'] = json_encode($evals);
 
         foreach ($pengisir as $spengisi) {
-            $top['kontributor'] = Agenda::where('pengisi', $spengisi)->where('status', '2')->count();
+            $top['kontributor'] = Agenda::where('pengisi_id', $spengisi)->where('status_id', '2')->count();
             $top['name'] = PersonalData::select('nama')->where('id', $spengisi)->first();
 
             $kontributors[] =  [$top['name']->nama, $top['kontributor']];

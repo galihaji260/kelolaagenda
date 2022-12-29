@@ -9,10 +9,10 @@ class PengisiYasinan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'pasaran', 'pengisi'];
+    protected $fillable = ['id', 'pasaran', 'personaldata_id'];
 
     public function personalData()
     {
-        return $this->hasMany('PersonalData', 'pengisi', 'id');
+        return $this->hasMany('PersonalData', 'personaldata_id', 'id');
     }
 }

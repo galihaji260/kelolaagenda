@@ -58,9 +58,11 @@ class PenilaianKegiatanController extends Controller
     public function edit($id)
     {
         //
-        $penilaianKegiatan = PenilaianKegiatan::where('agenda_id', $id)->where('user_id', auth()->id())->first();
+        $penilaianKegiatan = PenilaianKegiatan::where('agenda_id', $id)->where('penilai_id', auth()->id())->first();
+        $komentars = PenilaianKegiatan::where('agenda_id', $id)->get();
+
         $agendaId = $id;
-        return view('penilaian_kegiatan.edit', compact(['penilaianKegiatan', 'agendaId']));
+        return view('penilaian_kegiatan.edit', compact(['penilaianKegiatan', 'agendaId', 'komentars']));
     }
 
     /**
@@ -77,18 +79,19 @@ class PenilaianKegiatanController extends Controller
             'nilai' => 'required',
             'catatan_pelaksanaan' => 'required'
         ]);
-        $penilaianKegiatan = PenilaianKegiatan::where('agenda_id', $id)->where('user_id', auth()->id())->first();
+        $penilaianKegiatan = PenilaianKegiatan::where('agenda_id', $id)->where('penilai_id', auth()->id())->first();
         $file = $request->file('gambar');
         $filename = date('YmdHis').'_'.$file->getClientOriginalName();
         $tujuanUpload = 'data_file';
         $file->move($tujuanUpload, $filename);
+
         if (!$penilaianKegiatan) {
             PenilaianKegiatan::create([
                 'nilai' => $request->nilai,
                 'gambar' => $filename,
                 'catatan_pelaksanaan' => $request->catatan_pelaksanaan,
                 'agenda_id' => $request->agenda_id,
-                'user_id' => auth()->id()
+                'penilai_id' => auth()->id()
             ]);
         } else {
             $penilaianKegiatan->fill([
@@ -96,9 +99,35 @@ class PenilaianKegiatanController extends Controller
                 'gambar' => $filename,
                 'catatan_pelaksanaan' => $request->catatan_pelaksanaan,
                 'agenda_id' => $request->agenda_id,
-                'user_id' => auth()->id()
+                'penilai_id' => auth()->id()
             ])->save();
         }
+
+        //check if image is uploaded
+        // if ($request->hasFile('gambar')) {
+
+        //     //upload new image
+        //     $gamber = $request->file('gambar');
+        //     $image->storeAs('public/data_file', $gambar->hashName());
+
+        //     //delete old image
+        //     Storage::delete('public/data_file/'.$komentar->gambar);
+
+        //     //update post with new image
+        //     $post->update([
+        //         'gambar'     => $gambar->hashName(),
+        //         'title'     => $request->title,
+        //         'content'   => $request->content
+        //     ]);
+
+        // } else {
+
+        //     //update post without image
+        //     $post->update([
+        //         'title'     => $request->title,
+        //         'content'   => $request->content
+        //     ]);
+        // }
 
         return redirect()->route('agenda.index')->with('success', 'Penilaian Pelaksanaan Berhasil Diupdate');
     }

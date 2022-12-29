@@ -11,12 +11,8 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    private $breadcrumb;
+   
 
-    public function __construct()
-    {
-        $this->breadcrumb = 'Agenda';
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,46 +20,41 @@ class WelcomeController extends Controller
      */
     public function index(Request $request)
     {
-        // //
-        // if ($request->isMethod('post')) {
-        //     $search = array(
-        //         'tanggal' => $request->tahun . '-' . $request->bulan,
-        //         'divisi' => $request->divisi,
-        //         'jenis' => $request->jenis,
-        //         'nama_kegiatan' => $request->keyword
-        //     );
-        //     $agendas = Agenda::search($search);
-        // } else {
-        //     $agendas = Agenda::all();
-        // }
+        //
+        if ($request->isMethod('post')) {
+            $search = array(
+                'tanggal' => $request->tahun . '-' . $request->bulan,
+                'divisi' => $request->divisi,
+                'jenis' => $request->jenis,
+                'nama_kegiatan' => $request->keyword
+            );
+            $agendas = Agenda::search($search);
+        } else {
+            $agendas = Agenda::all();
+        }
 
-        // $tahun = ['' => '-- Pilih Bulan --','2022' => '2022', '2023' => '2023', '2024' => '2024', '2025' => '2025', '2026' => '2026'];
-        // $bulan = [
-        //     '' => '-- Pilih Bulan --',
-        //     '01' => 'Januari',
-        //     '02' => 'Februari',
-        //     '03' => 'Maret',
-        //     '04' => 'April',
-        //     '05' => 'Mei',
-        //     '06' => 'Juni',
-        //     '07' => 'Juli',
-        //     '08' => 'Agustus',
-        //     '09' => 'September',
-        //     '10' => 'Oktober',
-        //     '11' => 'November',
-        //     '12' => 'Desember'
-        // ];
-        // $divisi = Divisi::pluck('nama', 'id')->prepend('-- Pilih Divisi --', '');
-        // $jenis = JenisAgenda::pluck('nama', 'id')->prepend('-- Pilih Jenis --', '');
-        // $color = [
-        //     'berjalan' => '#FCC000',
-        //     'terlaksana' => '#4FBBBB',
-        //     'dibatalkan' => '#F44444'
-        // ];
-        // $breadcrumb = $this->breadcrumb;
+        $tahun = ['' => '-- Pilih Bulan --','2022' => '2022', '2023' => '2023', '2024' => '2024', '2025' => '2025', '2026' => '2026'];
+        $bulan = [
+            '' => '-- Pilih Bulan --',
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember'
+        ];
+        $divisi = Divisi::pluck('nama', 'id')->prepend('-- Pilih Divisi --', '');
+        $jenis = JenisAgenda::pluck('nama', 'id')->prepend('-- Pilih Jenis --', '');
+        $status = StatusKegiatan::pluck('nama', 'id')->prepend('-- Pilih Status --', '');
 
-       return view('latihan');
-        // return view('agenda.index', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'color', 'breadcrumb']));
+      
+        return view('welcome', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'status']));
     }
 
     /**

@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('status_kegiatans', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nama');
-            $table->timestamps();
+        Schema::table('agendas', function (Blueprint $table) {
+            $table->string('deskripsi_kegiatan')->after('tempat'); 
         });
     }
 
@@ -27,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_kegiatans');
+        Schema::table('agendas', function (Blueprint $table) {
+            //
+        });
     }
 };

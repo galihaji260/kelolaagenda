@@ -64,8 +64,8 @@ class AgendaController extends Controller
         //     'dibatalkan' => '#F44444'
         // ];
         $breadcrumb = $this->breadcrumb;
-       
-    
+
+        // dd($agendas);
          return view('agenda.index', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'status', 'breadcrumb']));
     }
 
@@ -110,7 +110,7 @@ class AgendaController extends Controller
      */
     public function edit($id)
     {
-        //
+
         $agenda = Agenda::findOrfail($id);
         $jenisagenda = JenisAgenda::pluck('nama', 'id');
         $divisi = Divisi::pluck('nama', 'id');
@@ -129,10 +129,11 @@ class AgendaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    
+       
         $request->validate([
-            'nama_kegiatan' => 'required',
-            'penanggung_jawab' => 'required'
+            'nama' => 'required',
+            'pic_id' => 'required'
         ]);
         $agenda = Agenda::findOrfail($id);
         $agenda->fill($request->post())->save();

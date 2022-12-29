@@ -9,7 +9,7 @@ class Agenda extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_kegiatan', 'tanggal', 'penanggung_jawab', 'pengisi', 'jenis', 'status', 'divisi', 'waktu_mulai', 'waktu_selesai','anggaran','realisasi_anggaran', 'tempat','deskripsi_kegiatan', 'status'];
+    protected $fillable = ['nama', 'tanggal', 'pic_id', 'pengisi_id', 'jenis_id', 'status_id', 'divisi_id', 'waktu_mulai', 'waktu_selesai','anggaran','realisasi_anggaran', 'tempat','deskripsi_kegiatan'];
 
     public static function search($data)
     {
@@ -25,24 +25,24 @@ class Agenda extends Model
   
     public function penanggungjawab()
     {
-        return $this->belongsTo(PersonalData::class, 'penanggung_jawab');
+        return $this->belongsTo(PersonalData::class, 'pic_id');
     }
 
     public function pengisiAgenda(){
-        return $this->belongsTo(PersonalData::class,'pengisi');
+        return $this->belongsTo(PersonalData::class,'pengisi_id');
     }
 
     
     public function statusAgenda(){
-        return $this->belongsTo(StatusKegiatan::class,'status');
+        return $this->belongsTo(StatusKegiatan::class,'status_id');
     }
 
     public function jenisAgenda(){
-        return $this->belongsTo(jenisAgenda::class,'jenis');
+        return $this->belongsTo(jenisAgenda::class,'jenis_id');
     }
 
     public function namaDivisi(){
-        return $this->belongsTo(Divisi::class,'divisi');
+        return $this->belongsTo(Divisi::class,'divisi_id');
     }
     public function punyanilai(){
         return $this->hasmany(PenilaianKegiatan::class);

@@ -24,8 +24,9 @@ class PengisiYasinanController extends Controller
     {
         //
         $breadcrumb = $this->breadcrumb;
-        $pengisi_yasinans = PengisiYasinan::leftjoin('personal_data', 'personal_data.id', 'pengisi_yasinans.pengisi')
-            ->get(['pengisi_yasinans.id', 'pengisi_yasinans.pasaran', 'personal_data.nama as pengisi']);
+        $pengisi_yasinans = PengisiYasinan::leftjoin('personal_data', 'personal_data.id', 'pengisi_yasinans.personaldata_id')
+            ->get(['pengisi_yasinans.id', 'pengisi_yasinans.pasaran', 'personal_data.nama as personaldata_id']);
+          
         return view('pengisi_yasinan.index', compact(['pengisi_yasinans', 'breadcrumb']));
     }
 
@@ -59,8 +60,8 @@ class PengisiYasinanController extends Controller
             'nama' => $request->nama,
             'no_hp'  => $request->no_hp,
             'tipe'  => 'eksternal',
-            'divisi' => '-',
-            'role' => '-',
+            'divisi_id' => '-',
+            'role_id' => '-',
         ]);
         return redirect()->route('anggota.index')->with('success', 'Sukses Menambah Data Anggota');
     }
@@ -99,11 +100,7 @@ class PengisiYasinanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $request->validate([
-            'pasaran' => 'required',
-            'pengisi' => 'required'
-        ]);
+        // dd($request, $id);
         $pengisi_yasinan = PengisiYasinan::findOrfail($id);
         $pengisi_yasinan->fill($request->post())->save();
 

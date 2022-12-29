@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('agendas', function (Blueprint $table) {
-            $table->integer('realisasi_anggaran')->after('anggaran')->default(0);
+            $table->foreign('pic_id')->references('id')->on('personal_data');
+            $table->foreign('pengisi_id')->references('id')->on('personal_data');
+            $table->foreign('jenis_id')->references('id')->on('jenis_agendas');
+            $table->foreign('status_id')->references('id')->on('status_kegiatans');
+            $table->foreign('divisi_id')->references('id')->on('divisis');
         });
     }
 

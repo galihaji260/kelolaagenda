@@ -105,10 +105,13 @@ class RancanganRutinController extends Controller
         if (isset($req['submit']) && $req['submit'] == 'Generate') {
             $pasaran = new PasaranHelper();
             $dates = $pasaran->getAllPasaranInYear($req['tahun'], $req['hari']);
-            $pengisi = PengisiYasinan::select(['pasaran', 'pengisi'])->get()->toArray();
+            $pengisi = PengisiYasinan::select(['pasaran', 'personaldata_id'])->get()->toArray();
             $personalData = PersonalData::pluck('nama', 'id');
             return view('rancangan.rutin.yasinan', compact(['dates', 'req', 'pengisi', 'personalData']));
         }
+
+        
+
         return view('rancanganrutin.index');
     }
 
@@ -121,18 +124,19 @@ class RancanganRutinController extends Controller
         $req = $request->input();
         for ($i = 0; $i < count($req['tanggal']); $i++) {
             Agenda::create([
-                'nama_kegiatan' => $req['kegiatan'][$i],
+                'nama' => $req['kegiatan'][$i],
                 'tanggal' => $req['tanggal'][$i],
                 'kegiatan' => $req['kegiatan'][$i],
-                'penanggung_jawab' => $req['penanggungjawab'][$i],
-                'pengisi' => $req['pengisi'][$i],
-                'jenis' => '1',
-                'status' => '1',
-                'divisi' => $req['divisi'][$i],
+                'pic_id' => $req['penanggungjawab'][$i],
+                'pengisi_id' => $req['pengisi'][$i],
+                'jenis_id' => '1',
+                'status_id' => '1',
+                'divisi_id' => $req['divisi'][$i],
                 'waktu_mulai' => $req['waktu_mulai'][$i],
                 'waktu_selesai' => $req['waktu_selesai'][$i],
                 'tempat'  => $req['lokasi'][$i],
                 'anggaran' => '0',
+                'realisasi_anggaran' =>'0',
                 'deskripsi_kegiatan' => '',
             ]);
         }
@@ -175,5 +179,12 @@ class RancanganRutinController extends Controller
             ]);
         }
         return redirect()->route('agenda.index');
+    }
+
+    public function getPengisi($id)
+    {
+        $pengisi = PengisiYasinan::join('personal_data', 'personal_data.id', 'pengisi_yasinans.personaldata_id')->where('pengisi_yasinans.pasaran', $id)->pluck('personal_data.nama', 'personal_data.id');
+
+        return response()->json($pengisi);
     }
 }
