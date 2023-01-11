@@ -60,8 +60,8 @@
                                             <th>Jenis</th>
                                             <th>Status</th>
                                             <th> Beri Nilai </th>
-                                            @if(Auth::user()->userRole->nama == 'Admin')
-                                            <th>Aksi</th>
+                                            @if (Auth::user()->userRole->nama == 'Admin')
+                                                <th>Aksi</th>
                                             @endif
                                         </tr>
                                     </thead>
@@ -94,24 +94,25 @@
                                                         <i class="fa fa-tasks" aria-hidden="true" title="Nilai"></i>
                                                     </a>
                                                 </td>
-                                                @if(Auth::user()->userRole->nama == 'Admin')
-                                                <td>
-                                                    <form action="{{ route('agenda.destroy', $agenda->id) }}"
-                                                        method="POST">
-                                                        <a class="" href="{{ route('agenda.edit', $agenda->id) }}">
-                                                            <i class="fa fa-pen" aria-hidden="true"></i>
-                                                        </a>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn">
-                                                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                                                        </button>
-                                                        <a class="" data-toggle="modal"
-                                                            data-target="#modalSaya{{ $agenda->id }}">
-                                                            <i class="fa fa-eye" aria-hidden="true" title="Nilai"></i>
-                                                        </a>
-                                                    </form>
-                                                </td>
+                                                @if (Auth::user()->userRole->nama == 'Admin')
+                                                    <td>
+                                                        <form action="{{ route('agenda.destroy', $agenda->id) }}"
+                                                            method="POST">
+                                                            <a class=""
+                                                                href="{{ route('agenda.edit', $agenda->id) }}">
+                                                                <i class="fa fa-pen" aria-hidden="true"></i>
+                                                            </a>
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn">
+                                                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                            </button>
+                                                            <a class="" data-toggle="modal"
+                                                                data-target="#modalSaya{{ $agenda->id }}">
+                                                                <i class="fa fa-eye" aria-hidden="true" title="Nilai"></i>
+                                                            </a>
+                                                        </form>
+                                                    </td>
                                                 @endif
                                             </tr>
                                         @endforeach

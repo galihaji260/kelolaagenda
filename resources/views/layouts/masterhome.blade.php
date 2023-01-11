@@ -2,102 +2,107 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Masjidku ho</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Masjidku</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-  <style>
-    .card-header {
-      border-bottom: solid #FBC02D;
-    }
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <style>
+        .card-header {
+            border-bottom: solid #FBC02D;
+        }
 
-    .content-wrapper {
-      padding-top: 30px;
-    }
+        .content-wrapper {
+            padding-top: 30px;
+        }
 
-    .content-header{
-      padding: 10px 0.5rem !important;
-    }
+        .content-header {
+            padding: 10px 0.5rem !important;
+        }
 
-    @media (max-width: 991.98px){
-      .breadcrumbs{
-        z-index: 1036 !important;
-      }
-    }
-  </style>
+        @media (max-width: 991.98px) {
+            .breadcrumbs {
+                z-index: 1036 !important;
+            }
+        }
+    </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
-  <!-- Site wrapper -->
-  <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #f4f6f9; border-bottom:#f4f6f9 solid 1px">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-      </ul>
+<body class="layout-top-nav">
+    <!-- Site wrapper -->
+    <div class="wrapper">
 
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-            <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" width="24" alt="User Image">
-            <span><i class="fas fa-sort-down ml-1"></i></span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
-            <a href="{{ route('logout') }}" class="dropdown-item">
-              <i class="fas fa-sign-out-alt mr-2"></i> Logout
-            </a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-    <!-- /.navbar -->
-    <div class="breadcrumbs" style="background-color: #f4f6f9;position: fixed; z-index:1039; display:block; width:250px;position: fixed;overflow-y: hidden;">
-      <div style=" z-index:1039; display:block; width:100%; padding:5px; background-color:#ffffff; padding-left:20px; margin-top:5px;">Home > {{ $breadcrumb ?? '' }}</div>
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+            <div class="container">
+                <a href="" class="navbar-brand">
+                    <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                        class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light">MASJIDKU</span>
+                </a>
+                <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
+                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="index3.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact</a>
+                        </li>
+                  
+                    </ul>
+
+                    <form class="form-inline ml-0 ml-md-3">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content-wrapper" style="min-height: 602px;">
+                <div class="container">
+                  @yield('content')
+                </div>
+        </div>
+
+
+        <footer class="main-footer">
+
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+
+            <strong>Copyright © 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
     </div>
-    
+    <!-- ./wrapper -->
 
-    <div style="background-color: #f4f6f9;position: fixed; z-index:1036; display:block; width:100%;position: fixed;overflow-y: hidden;">
-      <div style=" z-index:1039; display:block; width:100%; padding:5px; background-color:#ffffff; padding-left:20px; margin-top:5px;">Home &gt; Agenda</div>
-    </div>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      @yield('content')
-    </div>
-    <!-- /.content-wrapper -->
-
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 1.0.0
-      </div>
-      <strong>Copyright &copy; 2022.</strong> All rights reserved.
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.min.js"></script>
-  @stack('scripts')
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

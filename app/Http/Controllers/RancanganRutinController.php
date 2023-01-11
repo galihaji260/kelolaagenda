@@ -137,7 +137,7 @@ class RancanganRutinController extends Controller
                 'tempat'  => $req['lokasi'][$i],
                 'anggaran' => '0',
                 'realisasi_anggaran' =>'0',
-                'deskripsi_kegiatan' => '',
+                'deskripsi_kegiatan' => 'kegiatan rutin yasinan',
             ]);
         }
         return redirect()->route('rancanganrutin.index');
@@ -163,18 +163,19 @@ class RancanganRutinController extends Controller
         $req = $request->input();
         for ($i = 0; $i < count($req['tanggal']); $i++) {
             Agenda::create([
-                'nama_kegiatan' => $req['kegiatan'][$i],
+                'nama' => $req['kegiatan'][$i],
                 'tanggal' => $req['tanggal'][$i],
                 'kegiatan' => $req['kegiatan'][$i],
-                'penanggung_jawab' => $req['penanggungjawab'][$i],
-                'pengisi' => $req['pengisi'][$i],
-                'jenis' => '1',
-                'status' => '1',
-                'divisi' => $req['divisi'][$i],
+                'pic_id' => $req['penanggungjawab'][$i],
+                'pengisi_id' => $req['pengisi'][$i],
+                'jenis_id' => '1',
+                'status_id' => '1',
+                'divisi_id' => $req['divisi'][$i],
                 'waktu_mulai' => $req['waktu_mulai'][$i],
                 'waktu_selesai' => $req['waktu_selesai'][$i],
                 'tempat'  => $req['lokasi'][$i],
                 'anggaran' => '0',
+                'realisasi_anggaran' => '0',
                 'deskripsi_kegiatan' => '',
             ]);
         }

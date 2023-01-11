@@ -28,11 +28,11 @@ class AgendaController extends Controller
         if ($request->isMethod('post')) {
             $search = array(
                 'tanggal' => $request->tahun . '-' . $request->bulan,
-                'divisi' => $request->divisi,
-                'jenis' => $request->jenis,
-                'status' => $request->status,
+                'divisi_id' => $request->divisi,
+                'jenis_id' => $request->jenis,
+                'status_id' => $request->status,
 
-                'nama_kegiatan' => $request->keyword
+                'nama' => $request->keyword
             );
             $agendas = Agenda::search($search);
         } else {

@@ -24,9 +24,10 @@ class WelcomeController extends Controller
         if ($request->isMethod('post')) {
             $search = array(
                 'tanggal' => $request->tahun . '-' . $request->bulan,
-                'divisi' => $request->divisi,
-                'jenis' => $request->jenis,
-                'nama_kegiatan' => $request->keyword
+                'divisi_id' => $request->divisi,
+                'jenis_id' => $request->jenis,
+                'status_id' => $request->status,
+                'nama' => $request->keyword
             );
             $agendas = Agenda::search($search);
         } else {
@@ -53,7 +54,7 @@ class WelcomeController extends Controller
         $jenis = JenisAgenda::pluck('nama', 'id')->prepend('-- Pilih Jenis --', '');
         $status = StatusKegiatan::pluck('nama', 'id')->prepend('-- Pilih Status --', '');
 
-      
+    //   return view('latihan');
         return view('welcome', compact(['agendas', 'tahun', 'bulan', 'divisi', 'jenis', 'request', 'status']));
     }
 

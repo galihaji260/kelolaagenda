@@ -48,8 +48,9 @@ class RancanganBiasaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
         Agenda::create($request->post());
+        
         return redirect()->route('agenda.index')->with('success', 'Sukses Menambah Data Rancangan Agenda Biasa');
         // return view('agenda.index');
     }

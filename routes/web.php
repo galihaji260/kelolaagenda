@@ -27,7 +27,7 @@ use App\Http\Controllers\UserController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::post('/store', [PasaranController::class, 'store'])->name('pasaran.store');
+    // Route::post('/store', [PasaranController::class, 'store'])->name('pasaran.store');
     Route::resource('agenda', AgendaController::class);
     Route::resource('pengisiyasinan', PengisiYasinanController::class);
     Route::resource('jenisagenda', JenisAgendaController::class);
@@ -47,8 +47,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::resource('/', WelcomeController::class);
+Route::post('/', [WelcomeController::class, 'index'])->name('welcome');
 
 
 Route::get('login', [UserController::class, 'login'])->name('login');

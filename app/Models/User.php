@@ -43,13 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function persondata(){
-        return $this->hasMany(PersonalData::class, 'personal_data_id');
+    public function personData(){
+        return $this->belongsTo(PersonalData::class, 'personal_data_id');
     }
 
     public function userRole(){
         return $this->belongsTo(Role::class, 'role_id');
 
     }
+
 
 }

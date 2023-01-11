@@ -60,7 +60,7 @@ class PengisiYasinanController extends Controller
             'nama' => $request->nama,
             'no_hp'  => $request->no_hp,
             'tipe'  => 'eksternal',
-            'divisi_id' => '-',
+            'divisi_id' => '1',
             'role_id' => '-',
         ]);
         return redirect()->route('anggota.index')->with('success', 'Sukses Menambah Data Anggota');

@@ -15,8 +15,7 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Penilaian Kegiatan</h3>
-
+                            <h3 class="card-title">Penilaian Kegiatan</h3>
                             <div class="card-tools">
                             </div>
                         </div>
@@ -39,7 +38,7 @@
                             <div class="form-group">
                                 <label for="pasaran">Gambar</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="gambar" required>
+                                    <input type="file" class="custom-file-input" name="gambar">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                                 <input type="hidden" name="agenda_id" value="{{ $agendaId }}">
@@ -73,28 +72,32 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">komentar</h3>
+                        <h3 class="card-title">Hasil Penilaian</h3>
                         <div class="card-tools">
                         </div>
                     </div>
                     <div class="card-body">
+                        <div>
+                            <h4> Penilaian Rata-rata : {{ round($nilai, 1) }} </h4>
+                            <br>
+                        </div>
                         <div class="table-responsive">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>komentar</th>
                                         <th>Nilai</th>
+                                        <th>komentar</th>
                                         <th>gambar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($komentars as $komentar)
-                                        <tr>
-                                            <td>1</td>
-                                            <td>{{ $komentar->catatan_pelaksanaan }}</td>
-                                            <td>{{ $komentar->nilai }}</td>
 
+                                    @foreach ($komentars as $key => $komentar)
+                                        <tr>
+                                            <td>{{ ++$key }}</td>
+                                            <td>{{ $komentar->nilai }}</td>
+                                            <td>{{ $komentar->catatan_pelaksanaan }}</td>
                                             <td>
                                                 <img class="img-thumbnail" style="width: 300px"
                                                     src="{{ asset('data_file/' . $komentar->gambar) }}" alt=""

@@ -60,9 +60,9 @@ class PenilaianKegiatanController extends Controller
         //
         $penilaianKegiatan = PenilaianKegiatan::where('agenda_id', $id)->where('penilai_id', auth()->id())->first();
         $komentars = PenilaianKegiatan::where('agenda_id', $id)->get();
-
+        $nilai = PenilaianKegiatan::where('agenda_id', $id)->avg('nilai');
         $agendaId = $id;
-        return view('penilaian_kegiatan.edit', compact(['penilaianKegiatan', 'agendaId', 'komentars']));
+        return view('penilaian_kegiatan.edit', compact(['penilaianKegiatan', 'agendaId', 'komentars', 'nilai']));
     }
 
     /**
@@ -73,61 +73,37 @@ class PenilaianKegiatanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-        $request->validate([
-            'nilai' => 'required',
-            'catatan_pelaksanaan' => 'required'
+{
+    //
+    $request->validate([
+        'nilai' => 'required',
+        'catatan_pelaksanaan' => 'required',
+        'gambar' => 'nullable|image'
+    ]);
+    $penilaianKegiatan = PenilaianKegiatan::where('agenda_id', $id)->where('penilai_id', auth()->id())->first();
+    $file = $request->file('gambar');
+    $filename = date('YmdHis').'_'.$file->getClientOriginalName();
+    $tujuanUpload = 'data_file';
+    $file->move($tujuanUpload, $filename);
+
+    if (!$penilaianKegiatan) {
+        PenilaianKegiatan::create([
+            'nilai' => $request->nilai,
+            'gambar' => $filename,
+            'catatan_pelaksanaan' => $request->catatan_pelaksanaan,
+            'agenda_id' => $request->agenda_id,
+            'penilai_id' => auth()->id()
         ]);
-        $penilaianKegiatan = PenilaianKegiatan::where('agenda_id', $id)->where('penilai_id', auth()->id())->first();
-        $file = $request->file('gambar');
-        $filename = date('YmdHis').'_'.$file->getClientOriginalName();
-        $tujuanUpload = 'data_file';
-        $file->move($tujuanUpload, $filename);
+    } else {
+        $penilaianKegiatan->fill([
+            'nilai' => $request->nilai,
+            'gambar' => $filename,
+            'catatan_pelaksanaan' => $request->catatan_pelaksanaan,
+            'agenda_id' => $request->agenda_id,
+            'penilai_id' => auth()->id()
+        ])->save();
+    }
 
-        if (!$penilaianKegiatan) {
-            PenilaianKegiatan::create([
-                'nilai' => $request->nilai,
-                'gambar' => $filename,
-                'catatan_pelaksanaan' => $request->catatan_pelaksanaan,
-                'agenda_id' => $request->agenda_id,
-                'penilai_id' => auth()->id()
-            ]);
-        } else {
-            $penilaianKegiatan->fill([
-                'nilai' => $request->nilai,
-                'gambar' => $filename,
-                'catatan_pelaksanaan' => $request->catatan_pelaksanaan,
-                'agenda_id' => $request->agenda_id,
-                'penilai_id' => auth()->id()
-            ])->save();
-        }
-
-        //check if image is uploaded
-        // if ($request->hasFile('gambar')) {
-
-        //     //upload new image
-        //     $gamber = $request->file('gambar');
-        //     $image->storeAs('public/data_file', $gambar->hashName());
-
-        //     //delete old image
-        //     Storage::delete('public/data_file/'.$komentar->gambar);
-
-        //     //update post with new image
-        //     $post->update([
-        //         'gambar'     => $gambar->hashName(),
-        //         'title'     => $request->title,
-        //         'content'   => $request->content
-        //     ]);
-
-        // } else {
-
-        //     //update post without image
-        //     $post->update([
-        //         'title'     => $request->title,
-        //         'content'   => $request->content
-        //     ]);
-        // }
 
         return redirect()->route('agenda.index')->with('success', 'Penilaian Pelaksanaan Berhasil Diupdate');
     }

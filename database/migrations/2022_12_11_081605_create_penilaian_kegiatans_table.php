@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('agenda_id');
             $table->unsignedBigInteger('penilai_id');
             $table->integer('nilai');
-            $table->string('gambar');
+            $table->string('gambar')->nullable()->change();
             $table->longText('catatan_pelaksanaan');
            
             $table->foreign('agenda_id')->references('id')->on('agendas')->onDelete('cascade');

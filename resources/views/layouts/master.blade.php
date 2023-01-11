@@ -52,7 +52,7 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Notifications Dropdown Menu -->
                 <li>
-                    <a href="index3.html" class="nav-link">Hai {{ Auth::user()->userRole->nama }}</a>
+                    <h5 class="nav-link">Hai, {{ Auth::user()->personData->nama }}</h5>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -76,10 +76,11 @@
                 Home > {{ $breadcrumb ?? '' }}</div>
         </div>
         <!-- Main Sidebar Container -->
+
         <aside class="main-sidebar sidebar-light-primary">
             <!-- Brand Logo -->
             <a href="#" class="brand-link" style="background-color: #f4f6f9; border-bottom:#f4f6f9 solid 1px;">
-                <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle"
+                <img src="../../dist/img/AdminLTELogo.png" alt="Masjidku Logo" class="brand-image img-circle"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">Masjidku</span>
             </a>
@@ -110,30 +111,30 @@
                                 </p>
                             </a>
                         </li>
-                        @if(Auth::user()->userRole->nama == 'Admin')
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-clipboard"></i>
-                                <p>
-                                    Rancangan
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('rancanganrutin.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Rutin</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('rancanganbiasa.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Biasa</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (Auth::user()->userRole->nama == 'Admin')
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-clipboard"></i>
+                                    <p>
+                                        Rancangan
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('rancanganrutin.index') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Rutin</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('rancanganbiasa.index') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Biasa</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
                         <li class="nav-item">
                             <a href="{{ route('anggota.index') }}"

@@ -85,7 +85,7 @@
                     title: 'Statistik Kegiatan di hitung pertahun',
 
                 },
-                colors: ['#007bff', '#28a745', '#dc3545', '#17a2b8']
+                colors: ['#007bff', '#28a745', '#dc3545', '#fdf711']
 
             };
             console.log(options)
