@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class PenilaianKegiatanController extends Controller
 {
+    private $breadcrumb;
+
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +64,11 @@ class PenilaianKegiatanController extends Controller
         $komentars = PenilaianKegiatan::where('agenda_id', $id)->get();
         $nilai = PenilaianKegiatan::where('agenda_id', $id)->avg('nilai');
         $agendaId = $id;
-        return view('penilaian_kegiatan.edit', compact(['penilaianKegiatan', 'agendaId', 'komentars', 'nilai']));
+
+        $this->breadcrumb = 'Penilaian Kegiatan';
+        $breadcrumb = $this->breadcrumb;
+
+        return view('penilaian_kegiatan.edit', compact(['penilaianKegiatan', 'agendaId', 'komentars', 'nilai'], 'breadcrumb'));
     }
 
     /**

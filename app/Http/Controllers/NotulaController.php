@@ -7,6 +7,8 @@ use App\Models\Notulas;
 
 class NotulaController extends Controller
 {
+    private $breadcrumb;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +17,9 @@ class NotulaController extends Controller
     public function index()
     {
         $notulas = Notulas::all();
-        return view('notula.index', compact('notulas'));
+        $this->breadcrumb = 'Notula';
+        $breadcrumb = $this->breadcrumb;
+        return view('notula.index', compact('notulas','breadcrumb'));
     }
 
     /**
@@ -27,8 +31,10 @@ class NotulaController extends Controller
 
     public function create()
     {
-        {
-            return view('notula.create');
+        {   
+            $this->breadcrumb = 'Notula > Tambah';
+            $breadcrumb = $this->breadcrumb;
+            return view('notula.create', compact('breadcrumb'));
          }
     }
 
@@ -77,7 +83,9 @@ class NotulaController extends Controller
     public function edit($id)
     {
         $notula = Notulas::findOrfail($id);
-        return view('notula.edit', compact('notula'));
+        $this->breadcrumb = 'Notula > Edit';
+        $breadcrumb = $this->breadcrumb;
+        return view('notula.edit', compact('notula', 'breadcrumb'));
     }
 
     /**

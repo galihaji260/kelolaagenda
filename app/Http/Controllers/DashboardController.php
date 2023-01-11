@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+
+    private $breadcrumb;
+
+    public function __construct()
+    {
+        $this->breadcrumb = 'Dashboard';
+    }
     //
     public function index()
     {
@@ -35,13 +42,20 @@ class DashboardController extends Controller
         $data['agenda'] = json_encode($evals);
 
         foreach ($pengisir as $spengisi) {
-            $top['kontributor'] = Agenda::where('pengisi_id', $spengisi)->where('status_id', '2')->count();
+            $top['kontributor'] = Agenda::whereYear('tanggal', date('Y', strtotime('-1 year')))->where('pengisi_id', $spengisi)->where('status_id', '2')->count();
             $top['name'] = PersonalData::select('nama')->where('id', $spengisi)->first();
+            
+            $top1['kontributor'] = Agenda::whereYear('tanggal', date('Y'))->where('pengisi_id', $spengisi)->where('status_id', '2')->count();
+            $top1['name'] = PersonalData::select('nama')->where('id', $spengisi)->first();
 
             $kontributors[] =  [$top['name']->nama, $top['kontributor']];
+            $kontributors1[] =  [$top1['name']->nama, $top1['kontributor']];
         }
         $data['kontributor'] = json_encode($kontributors);
+        $data['kontributor1'] = json_encode($kontributors1);
 
-        return view('dashboard.index', compact('data'));
+
+        $breadcrumb = $this->breadcrumb;
+        return view('dashboard.index', compact('data', 'breadcrumb'));
     }
 }

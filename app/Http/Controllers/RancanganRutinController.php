@@ -13,10 +13,6 @@ class RancanganRutinController extends Controller
 {
     private $breadcrumb;
 
-    public function __construct()
-    {
-        $this->breadcrumb = 'Rancangan Rutin';
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +20,9 @@ class RancanganRutinController extends Controller
      */
     public function index()
     {
-        //
+        $this->breadcrumb = 'Rancangan Rutin';
         $breadcrumb = $this->breadcrumb;
+
         $divisi = Divisi::pluck('nama', 'id')->prepend('Pilih Divisi', '');
         $pic = PersonalData::where('tipe', 'internal')->pluck('nama', 'id')->prepend('Pilih PIC', '');
         $personalData = PersonalData::pluck('nama', 'id')->prepend('Pilih Pengisi', '');
@@ -107,7 +104,12 @@ class RancanganRutinController extends Controller
             $dates = $pasaran->getAllPasaranInYear($req['tahun'], $req['hari']);
             $pengisi = PengisiYasinan::select(['pasaran', 'personaldata_id'])->get()->toArray();
             $personalData = PersonalData::pluck('nama', 'id');
-            return view('rancangan.rutin.yasinan', compact(['dates', 'req', 'pengisi', 'personalData']));
+
+            $this->breadcrumb = 'Rancangan > Yasinan';
+            $breadcrumb = $this->breadcrumb;
+           
+
+            return view('rancangan.rutin.yasinan', compact(['dates', 'req', 'pengisi', 'personalData'], 'breadcrumb'));
         }
 
         
@@ -152,7 +154,11 @@ class RancanganRutinController extends Controller
             $dates = $pasaran->getAllPasaranInYear($req['tahun'], $req['hari'], $req['pasar']);
             $pengisi = PersonalData::pluck('nama', 'id');
             $personalData = PersonalData::pluck('nama', 'id');
-            return view('rancangan.rutin.lainnya', compact(['dates', 'req', 'personalData']));
+
+            $this->breadcrumb = 'Rancangan > lainnya';
+            $breadcrumb = $this->breadcrumb;
+
+            return view('rancangan.rutin.lainnya', compact(['dates', 'req', 'personalData'], 'breadcrumb'));
         }
         return view('rancanganrutin.index');
     }

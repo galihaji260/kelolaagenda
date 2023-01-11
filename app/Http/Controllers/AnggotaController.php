@@ -13,10 +13,6 @@ class AnggotaController extends Controller
 {
     private $breadcrumb;
 
-    public function __construct()
-    {
-        $this->breadcrumb = 'Agenda';
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +20,7 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        //
+        $this->breadcrumb = 'Anggota';
         $breadcrumb = $this->breadcrumb;
         $anggotas = PersonalData::leftJoin('divisis', 'divisis.id', 'personal_data.divisi_id')
             ->where('personal_data.tipe', 'internal')
@@ -39,10 +35,12 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-        //
+        $this->breadcrumb = 'Tambah Anggota';
+        $breadcrumb = $this->breadcrumb;
+
         $divisi = Divisi::pluck('nama', 'id');
         $role = Role::pluck('nama', 'id');
-        return view('anggota.create', compact('divisi', 'role'));
+        return view('anggota.create', compact('divisi', 'role', 'breadcrumb'));
     }
 
     /**
@@ -92,7 +90,10 @@ class AnggotaController extends Controller
         $divisi = Divisi::pluck('nama', 'id');
         $role = Role::pluck('nama', 'id');
 
-        return view('anggota.edit', compact(['anggota', 'divisi', 'role']));
+        $this->breadcrumb = 'Edit Anggota';
+        $breadcrumb = $this->breadcrumb;
+
+        return view('anggota.edit', compact(['anggota', 'divisi', 'role'], 'breadcrumb'));
     }
 
     /**

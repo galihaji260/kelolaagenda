@@ -82,25 +82,25 @@
                                         <div class="modal-body">
                                             <section class="content">
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col-2">
                                                         <div class="panel panel-pink">Judul</div>
                                                     </div>
-                                                    <div class="col">
-                                                        <div class="panel panel-pink">: {{ $notula->judul }}</div>
+                                                    <div class="col-10">
+                                                        <div class="panel panel-pink" style="font-weight: bold;">: {{ $notula->judul }}</div>
                                                     </div>
                                                 </div>
                                                 <hr />
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col-2">
                                                         <div class="panel panel-pink">Tanggal</div>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-10">
                                                         <div class="panel panel-pink">: {{ $notula->tanggal }}</div>
                                                     </div>
                                                 </div>
                                                 <hr />
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col-2">
                                                         <div class="panel panel-pink">Peserta</div>
                                                     </div>
                                                     <div class="col">
@@ -109,7 +109,7 @@
                                                 </div>
                                                 <hr />
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col-2">
                                                         <div class="panel panel-pink">Konten</div>
                                                     </div>
                                                     <div class="col">

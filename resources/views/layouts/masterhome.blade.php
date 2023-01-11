@@ -40,7 +40,7 @@
 
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
             <div class="container">
-                <a href="" class="navbar-brand">
+                <a href="{{ route('dashboard.index') }}" class="navbar-brand">
                     <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                         class="brand-image img-circle elevation-3" style="opacity: .8">
                     <span class="brand-text font-weight-light">MASJIDKU</span>
@@ -59,7 +59,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">Contact</a>
                         </li>
-                  
+
                     </ul>
 
                     <form class="form-inline ml-0 ml-md-3">
@@ -79,9 +79,9 @@
 
 
         <div class="content-wrapper" style="min-height: 602px;">
-                <div class="container">
-                  @yield('content')
-                </div>
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
 
 
@@ -90,8 +90,6 @@
             <div class="float-right d-none d-sm-inline">
                 Anything you want
             </div>
-
-            <strong>Copyright © 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
         </footer>
     </div>
     <!-- ./wrapper -->

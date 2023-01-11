@@ -42,6 +42,9 @@
                                         <div class="card-body">
                                             <div id="kontributor" style="width:100%"></div>
                                         </div>
+                                        <div class="card-body">
+                                            <div id="kontributor1" style="width:100%"></div>
+                                        </div>
                                         <!-- /.card-body -->
                                     </div>
 
@@ -56,6 +59,7 @@
             </div>
             <!-- /.row -->
         </div>
+
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -110,9 +114,33 @@
             }
             var data = google.visualization.arrayToDataTable(parameter);
             var options = {
-                title: 'Statistik Kontributor Pengisi'
+                title: 'Tahun Lalu'
             };
             var chart = new google.visualization.PieChart(document.getElementById('kontributor'));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var obj = JSON.parse(@json($data['kontributor1']));
+            var i;
+            var parameter = [
+                ['Nama Pengisi', 'Jumlah Agenda']
+            ];
+            for (i = 0; i < obj.length; i++) {
+                parameter.push(obj[i]);
+            }
+            var data = google.visualization.arrayToDataTable(parameter);
+            var options = {
+                title: 'Tahun Sekarang'
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('kontributor1'));
             chart.draw(data, options);
         }
     </script>

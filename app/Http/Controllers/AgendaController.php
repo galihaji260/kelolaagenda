@@ -13,10 +13,6 @@ class AgendaController extends Controller
 {
     private $breadcrumb;
 
-    public function __construct()
-    {
-        $this->breadcrumb = 'Agenda';
-    }
     /**
      * Display a listing of the resource.
      *
@@ -63,6 +59,7 @@ class AgendaController extends Controller
         //     'terlaksana' => '#4FBBBB',
         //     'dibatalkan' => '#F44444'
         // ];
+        $this->breadcrumb = 'Agenda';
         $breadcrumb = $this->breadcrumb;
 
         // dd($agendas);
@@ -117,7 +114,11 @@ class AgendaController extends Controller
         $penanggungjawab = PersonalData::where('tipe', 'internal')->pluck('nama', 'id');
         $pengisi = PersonalData::pluck('nama', 'id');
         $statuskegiatan = StatusKegiatan::pluck('nama', 'id');
-        return view('agenda.edit', compact(['agenda', 'jenisagenda', 'divisi', 'penanggungjawab', 'pengisi', 'statuskegiatan']));
+
+        $this->breadcrumb = 'Agenda Edit';
+        $breadcrumb = $this->breadcrumb;
+
+        return view('agenda.edit', compact(['agenda', 'jenisagenda', 'divisi', 'penanggungjawab', 'pengisi', 'statuskegiatan'], 'breadcrumb'));
     }
 
     /**

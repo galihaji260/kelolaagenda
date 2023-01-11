@@ -79,7 +79,8 @@
 
         <aside class="main-sidebar sidebar-light-primary">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link" style="background-color: #f4f6f9; border-bottom:#f4f6f9 solid 1px;">
+            <a href="{{ route('welcome') }}" class="brand-link"
+                style="background-color: #f4f6f9; border-bottom:#f4f6f9 solid 1px;">
                 <img src="../../dist/img/AdminLTELogo.png" alt="Masjidku Logo" class="brand-image img-circle"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">Masjidku</span>
@@ -192,7 +193,7 @@
             style="background-color: #f4f6f9;position: fixed; z-index:1036; display:block; width:100%;position: fixed;overflow-y: hidden;">
             <div
                 style=" z-index:1039; display:block; width:100%; padding:5px; background-color:#ffffff; padding-left:20px; margin-top:5px;">
-                Home &gt; Agenda</div>
+                Home &gt; {{ $breadcrumb ?? '' }}</div>
         </div>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

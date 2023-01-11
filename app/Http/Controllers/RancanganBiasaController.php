@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class RancanganBiasaController extends Controller
 {
+    private $breadcrumb;
+
+    public function __construct()
+    {
+        $this->breadcrumb = 'Rancangan Biasa';
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +43,10 @@ class RancanganBiasaController extends Controller
         $penanggungjawab = PersonalData::where('tipe', 'internal')->pluck('nama', 'id');
         $pengisi = PersonalData::pluck('nama', 'id');
         $statuskegiatan = StatusKegiatan::pluck('nama', 'id');
-        return view('rancangan.biasa.create', compact(['jenisagenda','divisi','penanggungjawab','pengisi', 'statuskegiatan']));
+
+        $breadcrumb = $this->breadcrumb;
+
+        return view('rancangan.biasa.create', compact(['jenisagenda','divisi','penanggungjawab','pengisi', 'statuskegiatan'], 'breadcrumb'));
 
         //  return view('agenda.index');
     }
